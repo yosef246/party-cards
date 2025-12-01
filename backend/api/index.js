@@ -37,6 +37,9 @@ app.use(
   })
 );
 
+// טיפול ספציפי ב-OPTIONS לכל הנתיבים (preflight)
+app.options("*", cors());
+
 //middleware - לייבוא המידע שנכנס
 app.use(express.json());
 
