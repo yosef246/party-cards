@@ -36,8 +36,16 @@ app.use(
   })
 );
 
-// טיפול ספציפי ב-OPTIONS לכל הנתיבים (preflight)
-app.options("*", cors());
+app.options(
+  "*",
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://party-cards-client.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 
 //middleware - לייבוא המידע שנכנס
 app.use(express.json());
