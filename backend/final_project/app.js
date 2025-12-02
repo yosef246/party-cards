@@ -1,7 +1,9 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors from "cors";
+// import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import newUserRouter from "./routes/auth.js";
 import postRouter from "./routes/post.js";
@@ -17,35 +19,42 @@ const port = process.env.PORT || 3000;
 //env מאפשר לי להשתמש בערכים שנמצאים בקובץ
 dotenv.config();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://party-cards-client.onrender.com",
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Accept",
-      "Cookie",
-      "Set-Cookie",
-    ],
-    exposedHeaders: ["Set-Cookie"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://party-cards-client.onrender.com",
+//     ],
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     allowedHeaders: [
+//       "Content-Type",
+//       "Authorization",
+//       "Accept",
+//       "Cookie",
+//       "Set-Cookie",
+//     ],
+//     exposedHeaders: ["Set-Cookie"],
+//   })
+// );
 
-app.options(
-  "*",
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://party-cards-client.onrender.com",
-    ],
-    credentials: true,
-  })
-);
+// app.options(
+//   "*",
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://party-cards-client.onrender.com",
+//     ],
+//     credentials: true,
+//   })
+// );
+
+// app.use(
+//   cors({
+//     origin: true, // מזהה אוטומטית את הדומיין שממנו מגיעה הבקשה
+//     credentials: true, // מאפשר שליחת cookies
+//   })
+// );
 
 //middleware - לייבוא המידע שנכנס
 app.use(express.json());
@@ -60,6 +69,18 @@ app.use("/api/auth", newUserRouter);
 app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/payment", paymentRouter);
+
+// Fix for __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve frontend build
+app.use(express.static(path.join(__dirname, "../../frontend/build")));
+
+// Any route → send index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../frontend/build", "index.html"));
+});
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Example run on port ${port}!`);

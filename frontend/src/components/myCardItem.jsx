@@ -10,13 +10,10 @@ export default function MyCardItem(props) {
 
   async function handleDelete() {
     try {
-      const response = await fetch(
-        `https://party-cards-server.onrender.com/api/post/${id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`/api/post/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
 
       const data = await response.json();
 
