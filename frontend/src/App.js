@@ -17,12 +17,12 @@ function App() {
 
   return (
     <>
-      <Header antherBotton={isTrue} />
+      <Header handleHeader={isTrue} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login handleHeader={setIsTrue} />} />
         <Route path="/register" element={<Register />} />
         <Route
           path="/party-cards"

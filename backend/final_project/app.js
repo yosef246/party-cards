@@ -49,13 +49,6 @@ dotenv.config();
 //   })
 // );
 
-// app.use(
-//   cors({
-//     origin: true, // מזהה אוטומטית את הדומיין שממנו מגיעה הבקשה
-//     credentials: true, // מאפשר שליחת cookies
-//   })
-// );
-
 //middleware - לייבוא המידע שנכנס
 app.use(express.json());
 
@@ -70,11 +63,11 @@ app.use("/api/post", postRouter);
 app.use("/api/tag", tagRouter);
 app.use("/api/payment", paymentRouter);
 
-// Fix for __dirname in ES Modules
+// לוקח את הקובץ APP.JS וממיר אותו לנתיב יחסי
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve frontend build
+// בונה נתיב יחסי מהתקייה הזאת לתיקיית הבילד
 app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
 // Any route → send index.html
