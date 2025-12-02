@@ -17,6 +17,7 @@ function App() {
 
   return (
     <>
+      <p>isTrue: {isTrue.toString()}</p>
       <Header handleHeader={isTrue} />
       <Routes>
         <Route path="/" element={<Home />} />
