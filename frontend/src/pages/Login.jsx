@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function LoginPage({ handleHeader }) {
+export default function LoginPage({ setHandleHeader }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function LoginPage({ handleHeader }) {
 
       console.log("Login successful:", data);
       alert("נכנסת בהצלחה!");
-      handleHeader(true);
+      setHandleHeader(true);
       setEmail("");
       setPassword("");
       navigate("/party-cards");

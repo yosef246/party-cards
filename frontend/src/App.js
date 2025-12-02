@@ -22,11 +22,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login handleHeader={setIsTrue} />} />
+        <Route path="/login" element={<Login setHandleHeader={setIsTrue} />} />
         <Route path="/register" element={<Register />} />
         <Route
           path="/party-cards"
-          element={<CreatePartyCard handleHeader={setIsTrue} />}
+          element={<CreatePartyCard setHandleHeader={setIsTrue} />}
         />
         <Route path="/all-cards" element={<AllCards />} />
         <Route path="/my-cards" element={<MyCards />} />
