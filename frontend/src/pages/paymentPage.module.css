@@ -1,6 +1,6 @@
 .paymentContainer {
   background: linear-gradient(to top, #0a0a0a, #1a1a1d, #222226);
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
